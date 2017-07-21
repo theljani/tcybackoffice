@@ -3,9 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
-    children: []
-  }
+    path: '', pathMatch: 'full', redirectTo: 'certifications-tool'
+  },
 ];
 
 @NgModule({

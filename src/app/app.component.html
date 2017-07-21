@@ -1,4 +1,64 @@
-<h1>
-  {{title}}
+<!--<h1>
+  <md-input-container>
+    <input mdInput [(ngModel)]="myInput"
+    placeholder="Email" type="email"
+    required [errorStateMatcher]="myErrorStateMatcher">
+    <md-error>This field is required</md-error>
+  </md-input-container>
 </h1>
-<router-outlet></router-outlet>
+<div class="back_office">
+  <div class="back_office_left">
+    
+  </div>
+  <div class="back_office_right">
+    <div class="back_office_header"></div>
+    <div class="back_office_content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+-->
+<div>
+    <div class="nav-side-menu col-md-4 pull-left">
+        <div class="brand">TCY Back Office</div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+      
+            <div class="menu-list">
+      
+                <ul id="menu-content" class="menu-content collapse out">
+                    <li>
+                      <a href="#">
+                      <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                      </a>
+                    </li>
+
+                    <li  data-toggle="collapse" data-target="#certifications_tool" class="collapsed active">
+                      <a><i class="fa fa-gift fa-lg"></i> CERTIFICATION TOOL <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="certifications_tool">
+                        <li [ngClass]="isCurrent('certifications-tool')"><a [routerLink]="['/certifications-tool']">Certifications</a></li>
+                        <li [ngClass]="isCurrent('certifications-tool/categories')"><a [routerLink]="['/certifications-tool/categories']">Certification Categories</a></li>
+                        <li [ngClass]="isCurrent('certifications-tool/activities')"><a [routerLink]="['/certifications-tool/activities']">Activities</a></li>
+                        <li [ngClass]="isCurrent('certifications-tool/countries')"><a [routerLink]="['/certifications-tool/countries']">Countries</a></li>
+                    </ul>
+
+                    <li  data-toggle="collapse" data-target="#rawmaterials_tool" class="collapsed active">
+                      <a href="#"><i class="fa fa-gift fa-lg"></i> RAW MATERIAL TOOL <span class="arrow"></span></a>
+                    </li>
+                    <ul class="sub-menu collapse" id="rawmaterials_tool">
+                        <li class="active"><a href="#">Raw materials</a></li>
+                        <li><a href="#">Raw material categories</a></li>
+                    </ul>
+                </ul>
+        </div>
+    </div>
+    <div id="page-content-wrapper" class="col-md-8 pull-right">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <router-outlet></router-outlet>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
