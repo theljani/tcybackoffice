@@ -1,3 +1,41 @@
-<h1>
-  certifications-list works!
-</h1>
+<md-card class="certifications-list">
+  <md-card-header>
+    <md-card-title>
+      <h4>Certifications</h4>
+    </md-card-title>
+  </md-card-header>
+  <md-card-content>
+    <div class="certfifications_filter">
+      <md-input-container floatPlaceholder="true">
+        <input 
+        [(ngModel)]="searchFilter" 
+        (ngModelChange)="ngOnChanges($event)"
+        mdInput #filter placeholder="Filter certifications">
+      </md-input-container>
+    </div>
+    <md-table #table [dataSource]="dataSource" mdSort>
+
+      <ng-container cdkColumnDef="publicId">
+        <md-header-cell *cdkHeaderCellDef md-sort-header>Public ID</md-header-cell>
+        <md-cell *cdkCellDef="let row">{{row.publicId}}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="name">
+        <md-header-cell *cdkHeaderCellDef md-sort-header>Certification name</md-header-cell>
+        <md-cell *cdkCellDef="let row">{{row.name}}</md-cell>
+      </ng-container>
+
+      <md-header-row *cdkHeaderRowDef="certificationsColumns"></md-header-row>
+      <md-row *cdkRowDef="let row; columns: certificationsColumns;"></md-row>
+    </md-table>
+    
+  </md-card-content>
+  <md-card-actions>
+      <md-paginator  #paginator
+                    [length]="CertificationsData.data.length"
+                    [pageIndex]="0"
+                    [pageSize]="2"
+                    [pageSizeOptions]="[2, 5, 10, 25, 100]">
+      </md-paginator>
+  </md-card-actions>
+</md-card>
