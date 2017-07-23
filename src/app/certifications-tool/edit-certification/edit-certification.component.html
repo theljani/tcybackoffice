@@ -1,0 +1,99 @@
+<div class="certification">
+  <!--<md-card-header>
+    <md-card-title>
+      <h3>New certification</h3>
+    </md-card-title>
+  </md-card-header>-->
+
+  <md-card-content class="certification_content">
+    <form [formGroup]='certificationFormGroup'>
+      <table class="formFullWidth">
+        <tr>
+          <td>
+            <md-input-container floatPlaceholder="true">
+              <input mdInput 
+                [(ngModel)]="publicId"
+                formControlName="publicId"
+                placeholder="Public ID"/>
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container floatPlaceholder="true">
+                <input mdInput
+                [(ngModel)]="name"
+                formControlName="name"
+                placeholder="Certification Name" >
+            </md-input-container>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <md-input-container floatPlaceholder="true">
+                <input mdInput
+                [(ngModel)]="languageEn"
+                formControlName="languageEn"
+                placeholder="English Term" >
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container floatPlaceholder="true">
+                <input mdInput
+                [(ngModel)]="languageFr"
+                formControlName="languageFr"
+                placeholder="French Term" >
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container floatPlaceholder="true">
+                <input mdInput
+                [(ngModel)]="languageEs"
+                formControlName="languageEs"
+                placeholder="Spanish Term" >
+            </md-input-container>
+          </td>
+          <td>
+            <md-input-container floatPlaceholder="true">
+                <input mdInput
+                [(ngModel)]="languageZh"
+                formControlName="languageZh"
+                placeholder="Chineese Term" >
+            </md-input-container>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+              <label>Entity Types:</label>
+              <md-checkbox class="sides-margin"
+                formControlName="facilityEntityType"
+                [(ngModel)]="facilityEntityType"
+                color="primary">Facility</md-checkbox>
+              <md-checkbox class="sides-margin"
+                formControlName="productEntityType"
+                [(ngModel)]="productEntityType"
+                color="primary">Product Reference</md-checkbox>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="4">
+            <div class="certification_content_tabs">
+              <md-tab-group>
+                <md-tab label="Certification Categories">
+                  <div class="certification_tabs-content">
+                    <app-drag-drop></app-drag-drop>
+                  </div>
+                </md-tab>
+                <md-tab label="Certification Activities">Content 2</md-tab>
+                <md-tab label="Certification Countries">Content 3</md-tab>
+              </md-tab-group>
+            </div>  
+          </td>
+        </tr>
+      </table>
+    </form>
+  </md-card-content>
+  <md-card-actions class="certification_actions pull-right">
+    <a md-raised-button color="accent" [routerLink]="['/certifications-tool']">Cancel</a>
+    <button md-raised-button color="primary" (click)="closeSideNavigation()">Confirm Creation</button>
+  </md-card-actions>
+</div>

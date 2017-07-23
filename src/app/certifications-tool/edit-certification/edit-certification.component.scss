@@ -1,0 +1,60 @@
+.certification {
+    width: 100%;
+    height:auto;
+    overflow: hidden;
+    overflow-x: hidden;
+    margin: 10px;
+
+    .formFullWidth {
+        width: 100%;
+    }
+
+    label {
+        font-weight: 100;
+        margin-right: 20px;
+    }
+
+    .sides-margin {
+        font-weight: 100;
+        margin: 0 20px 0 10px;
+    }
+    .certification_content {
+        margin: 20px 0;
+    }
+    .edit-certification-categories {
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .edit-certification-activities {
+        width: 100%;
+        margin-right: 20px;
+        margin-top: 40px;
+    }
+
+    .edit-certification-countries {
+        width: 100%;
+        margin-right: 20px;
+        margin-top: 40px;
+    }
+
+    .certification_content_tabs {
+        min-height: 100px;
+        border: 1px solid lightgray;
+        padding-bottom: 20px;
+        margin-top: 30px;
+        margin-right: 40px; 
+    }
+
+    .certification_tabs-content {
+        padding: 20px;
+    }
+
+    .certification_actions {
+        margin: 40px 40px 40px 0;
+        a {
+             text-decoration: none;
+         }
+    }
+}
+

@@ -14,7 +14,7 @@ export class AppComponent {
 
   isCurrent(route: string): string {
     if(this._router.isActive(route, true)) {
-     return "active";
+     return "active isCurrent";
     }
 
     return "";

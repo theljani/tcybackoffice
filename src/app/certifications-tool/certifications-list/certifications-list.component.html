@@ -1,41 +1,105 @@
-<md-card class="certifications-list">
-  <md-card-header>
-    <md-card-title>
-      <h4>Certifications</h4>
-    </md-card-title>
-  </md-card-header>
-  <md-card-content>
-    <div class="certfifications_filter">
-      <md-input-container floatPlaceholder="true">
-        <input 
-        [(ngModel)]="searchFilter" 
-        (ngModelChange)="ngOnChanges($event)"
-        mdInput #filter placeholder="Filter certifications">
-      </md-input-container>
-    </div>
-    <md-table #table [dataSource]="dataSource" mdSort>
+<div class="certifications-list">
+  <!--<md-sidenav-container class="sidenav-container">-->
+    <md-card-header>
+      <md-card-title>
+        <h4>Certifications</h4>
+      </md-card-title>
+    </md-card-header>
+    <!--<md-card-actions class="pull-right">
+      <a md-mini-fab color="primary" (click)="CertificationSidenav.open()"><md-icon>add</md-icon></a>
+      <a md-mini-fab color="accent" (click)="editCertificationSidenav.open()"><md-icon>edit</md-icon></a>
+      <a md-mini-fab color="warn" [disabled]="true"><md-icon>remove</md-icon></a>
+    </md-card-actions>-->
+    <md-card-content>
+      <div class="row">
+        <div class="certfifications_list_actions_buttons">
+          <div class="pull-left">
+            <md-input-container floatPlaceholder="true">
+              <input 
+              [(ngModel)]="searchFilter" 
+              (ngModelChange)="ngOnChanges($event)"
+              mdInput #filter placeholder="Search certifications">
+          </md-input-container>
+          <!--<button md-raised-button (click)="clearFilter()"><md-icon>clear</md-icon></button>-->
+          </div>
+          <div class="pull-right">
+            <a md-mini-fab color="primary" [routerLink]="['/certifications-tool/new-certification']"><md-icon>add</md-icon></a>
+            <a md-mini-fab color="accent" [disabled]="!selectedCertification" [routerLink]="['/certifications-tool/edit-certification', selectedCertification ? selectedCertification.publicId:'']"><md-icon>edit</md-icon></a>
+            <a md-mini-fab color="warn" [disabled]="true"><md-icon>remove</md-icon></a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="certifications-list-items">
+          <md-table #table [dataSource]="dataSource" mdSort>
+            <ng-container cdkColumnDef="checkAll">
+              <md-header-cell [ngClass]="'customWidthClass'" *cdkHeaderCellDef >
+                  <md-checkbox
+                    [(ngModel)]="allRowsChecked"
+                    [checked]="allRowsChecked"
+                    (change)= "onCheckAllChanges($event)"
+                    [align]="align"
+                    [disabled]="disabled"
+                    color="primary">
+                </md-checkbox>
+              </md-header-cell>
+              <md-cell [ngClass]="'customWidthClass'" *cdkCellDef="let row">
+                  <md-checkbox
+                    [(ngModel)]="row.isChecked"
+                    [checked]="row.isChecked"
+                    (change)="onCheckboxChecked(row)"
+                    [align]="align"
+                    [disabled]="disabled"
+                    color="primary">
+                </md-checkbox>
+              </md-cell>
+            </ng-container>
+            <ng-container cdkColumnDef="name">
+              <md-header-cell *cdkHeaderCellDef md-sort-header>Certification</md-header-cell>
+              <md-cell *cdkCellDef="let row">{{row.name}}</md-cell>
+            </ng-container>
 
-      <ng-container cdkColumnDef="publicId">
-        <md-header-cell *cdkHeaderCellDef md-sort-header>Public ID</md-header-cell>
-        <md-cell *cdkCellDef="let row">{{row.publicId}}</md-cell>
-      </ng-container>
+            <ng-container  cdkColumnDef="languageEn">
+              <md-header-cell *cdkHeaderCellDef md-sort-header>Language=EN</md-header-cell>
+              <md-cell *cdkCellDef="let row">{{row.languageEn}}</md-cell>
+            </ng-container>
 
-      <ng-container cdkColumnDef="name">
-        <md-header-cell *cdkHeaderCellDef md-sort-header>Certification name</md-header-cell>
-        <md-cell *cdkCellDef="let row">{{row.name}}</md-cell>
-      </ng-container>
+            <ng-container cdkColumnDef="languageFr">
+              <md-header-cell  *cdkHeaderCellDef md-sort-header>Language=FR</md-header-cell>
+              <md-cell *cdkCellDef="let row">{{row.languageFr}}</md-cell>
+            </ng-container>
 
-      <md-header-row *cdkHeaderRowDef="certificationsColumns"></md-header-row>
-      <md-row *cdkRowDef="let row; columns: certificationsColumns;"></md-row>
-    </md-table>
-    
-  </md-card-content>
-  <md-card-actions>
-      <md-paginator  #paginator
-                    [length]="CertificationsData.data.length"
-                    [pageIndex]="0"
-                    [pageSize]="2"
-                    [pageSizeOptions]="[2, 5, 10, 25, 100]">
-      </md-paginator>
-  </md-card-actions>
-</md-card>
+            <ng-container cdkColumnDef="languageEs">
+              <md-header-cell  *cdkHeaderCellDef md-sort-header>Language=ES</md-header-cell>
+              <md-cell *cdkCellDef="let row">{{row.languageEs}}</md-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="languageZh">
+              <md-header-cell  *cdkHeaderCellDef md-sort-header>Language=ZH</md-header-cell>
+              <md-cell *cdkCellDef="let row">{{row.languageZh}}</md-cell>
+            </ng-container>
+
+            <md-header-row *cdkHeaderRowDef="certificationsColumns"></md-header-row>
+            <md-row  *cdkRowDef="let row; columns: certificationsColumns;" [ngClass]="{'isSelected': row.isChecked }"></md-row>
+          </md-table>
+        </div>
+      </div>
+      
+    </md-card-content>
+    <md-card-actions>
+        <md-paginator  #paginator
+                      [length]="CertificationsData.data.length"
+                      [pageIndex]="0"
+                      [pageSize]="10"
+                      [pageSizeOptions]="[5, 10, 25, 100]">
+        </md-paginator>
+    </md-card-actions>
+
+    <!--<md-sidenav #newCertifSideNav mode="push" #CertificationSidenav class="edit-certification-sidenav">
+      <app-edit-certification (closeClicked)="CertificationSideNavClose($event)"></app-edit-certification>
+    </md-sidenav>-->
+    <!--<md-sidenav mode="push" #editCertificationSidenav class="example-sidenav">
+      Create New Certification
+    </md-sidenav>-->
+  <!--</md-sidenav-container>-->
+</div>

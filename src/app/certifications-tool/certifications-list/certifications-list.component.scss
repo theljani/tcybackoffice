@@ -1,0 +1,51 @@
+.certifications-list {
+    .sidenav-container {
+        width: 100%;
+        height: auto;
+
+        background-color: white;
+        overflow: hidden;
+    }
+
+    .edit-certification-sidenav {
+    display: flex;
+    height: auto;
+    overflow-x: hidden; 
+    width: 100%;
+    //   align-items: center;
+    //   justify-content: center;
+    }
+
+    .customWidthClass {
+        flex: 0 0 60px;
+    }
+
+    md-row:hover {
+        background-color: #e0e0e0;
+    }
+
+    .isSelected {
+        background-color: #e0e0e0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .certfifications_list_actions_buttons {
+        margin: 0 15px 0 25px;
+    }
+}
+
+// .sidenav-container > .mat-sidenav-content {
+//     padding: 20px !important;
+// }
+
+.mat-sidenav-content {
+    overflow: hidden;
+}
+
+app-edit-certification {
+    width: 100%;
+    margin-right: 30px;
+}
