@@ -4,13 +4,13 @@
   </div>
   
   <div class="link_panel_content">
-    <md-input-container>
+    <md-input-container *ngIf="editModeEnabled">
       <input mdInput placeholder="Search" [mdAutocomplete]="auto">
     </md-input-container>
     <div class="link_panel_content_items">
       <div *ngFor="let item of panelDetails.items" class="link_panel_content_item">
         {{item.name}}
-        <md-icon class="link_panel_content_item_deleteButton">delete</md-icon>
+        <md-icon *ngIf="editModeEnabled" class="link_panel_content_item_deleteButton">delete</md-icon>
       </div>
     </div>
   </div>

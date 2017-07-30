@@ -4,10 +4,16 @@
       <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
-      <button md-menu-item (click)="onActivateEditMode()">
+      <button md-menu-item (click)="onActivateEditMode()" *ngIf="!editModeEnabled">
         <md-icon>edit</md-icon>
-        <span>Activate Edit</span>
+        <span>Enable Edit</span>
       </button>
+
+      <button md-menu-item (click)="onEditModeDisable()" *ngIf="editModeEnabled">
+        <md-icon>edit</md-icon>
+        <span>Disable Edit</span>
+      </button>
+
       <button md-menu-item>
         <md-icon>delete</md-icon>
         <span>Delete</span>
@@ -23,7 +29,6 @@
               <input mdInput 
                 [(ngModel)]="publicId"
                 formControlName="publicId"
-                [disabled]="!editModeActivated"
                 placeholder="Public ID"/>
             </md-input-container>
           </td>
@@ -31,7 +36,6 @@
             <md-input-container floatPlaceholder="true">
                 <input mdInput
                 [(ngModel)]="name"
-                [disabled]="certification && !editModeActivated"
                 formControlName="name"
                 placeholder="Certification Name" >
             </md-input-container>
@@ -43,7 +47,6 @@
                 <input mdInput
                 [(ngModel)]="languageEn"
                 formControlName="languageEn"
-                [disabled]="certification && !editModeActivated"
                 placeholder="English Term" >
             </md-input-container>
           </td>
@@ -51,7 +54,6 @@
             <md-input-container floatPlaceholder="true">
                 <input mdInput
                 [(ngModel)]="languageFr"
-                [disabled]="certification && !editModeActivated"
                 formControlName="languageFr"
                 placeholder="French Term" >
             </md-input-container>
@@ -60,7 +62,6 @@
             <md-input-container floatPlaceholder="true">
                 <input mdInput
                 [(ngModel)]="languageEs"
-                [disabled]="certification && !editModeActivated"
                 formControlName="languageEs"
                 placeholder="Spanish Term" >
             </md-input-container>
@@ -69,7 +70,6 @@
             <md-input-container floatPlaceholder="true">
                 <input mdInput
                 [(ngModel)]="languageZh"
-                [disabled]="certification && !editModeActivated"
                 formControlName="languageZh"
                 placeholder="Chineese Term" >
             </md-input-container>
@@ -91,21 +91,21 @@
       </table>
       <div class="certification_content_links">
         <div class="col-md-4 col-sm-12 col-xs-12">
-          <app-certification-links-panel #categoriesPanel [panelDetails]='categoriesPanelDetails'></app-certification-links-panel>
+          <app-certification-links-panel #categoriesPanel [editModeEnabled]="editModeEnabled" [panelDetails]='categoriesPanelDetails'></app-certification-links-panel>
         </div>
 
         <div class="col-md-4 col-sm-12 col-xs-12">
-          <app-certification-links-panel #activitiesPanel [panelDetails]='activitiesPanelDetails'></app-certification-links-panel>     
+          <app-certification-links-panel #activitiesPanel [editModeEnabled]="editModeEnabled" [panelDetails]='activitiesPanelDetails'></app-certification-links-panel>     
         </div>
 
         <div class="col-md-4 col-sm-12 col-xs-12">
-          <app-certification-links-panel #countriesPanel [panelDetails]='countriesPanelDetails'></app-certification-links-panel>          
+          <app-certification-links-panel #countriesPanel [editModeEnabled]="editModeEnabled" [panelDetails]='countriesPanelDetails'></app-certification-links-panel>          
         </div>
       </div>
     </form>
   </md-card-content>
   <md-card-actions class="certification_actions pull-right">
     <a md-raised-button color="accent" [routerLink]="['/']">Cancel</a>
-    <button md-raised-button color="primary" [disabled]="certification && ! editModeActivated" (click)="closeSideNavigation()">Confirm</button>
+    <button md-raised-button color="primary" [disabled]="certification && ! editModeEnabled" (click)="closeSideNavigation()">Confirm</button>
   </md-card-actions>
 </div>

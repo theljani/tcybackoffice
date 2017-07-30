@@ -96,13 +96,12 @@ export class CertificationsService {
           {
             publicId: '9F29E560-4FFD-49B5-A417-A7239471AB8A',
             name: 'Turquie'
-          },
-          {
-            publicId: '7DR5E560-4FFD-49B5-A417-A72394711234',
-            name: 'Palestine'
-          }  
+          }
         ],
-        entityTypes: []
+        entityTypes: [
+          'Facility',
+          'ProductRef'
+        ]
       },
       {
         publicId: "17B74053-7E34-4146-8036-73707BD0DBA5",
@@ -117,9 +116,21 @@ export class CertificationsService {
             name: 'Category 3'
           }
         ],
-        activities: [],
-        countries: [],
-        entityTypes: []
+        activities: [
+          {
+            publicId: '9F29E560-4FFD-49B5-A417-A7239471AB8A',
+            name: 'Activity 1'
+          }
+        ],
+        countries: [
+          {
+            publicId: '9F29E560-4FFD-49B5-A417-A7239471AB8A',
+            name: 'China'
+          },
+        ],
+        entityTypes: [
+          'Facility'
+        ]
       },
       {    
         publicId: "0EFE33B8-61A8-48C1-B624-7137F19FB8C8",

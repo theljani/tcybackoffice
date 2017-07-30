@@ -8,6 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CertificationLinksPanelComponent implements OnInit {
 
   @Input() panelDetails: any;
+  @Input() editModeEnabled: boolean;
+  
   constructor() {}
 
   ngOnInit() {

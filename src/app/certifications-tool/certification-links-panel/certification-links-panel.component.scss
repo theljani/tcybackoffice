@@ -19,7 +19,7 @@
 
         .link_panel_content_items {
             margin: 0;
-            padding: 0;
+            padding: 20px 0;
             max-height: 500px;
             min-height: 100px;
             overflow-y: auto;
@@ -35,6 +35,7 @@
                 .link_panel_content_item_deleteButton {
                     float: right;
                     margin-top: -5px;
+                    cursor: pointer;
                 }
             }
         }

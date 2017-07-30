@@ -39,7 +39,7 @@ export class EditCertificationComponent implements OnInit {
   activitiesPanelTitle: string = "Activities Panel";
   countriesPanelTitle: string = "Countries Panel";
 
-  editModeActivated = false;
+  editModeEnabled = true;
 
   // models
   certification: CertificationDetails;
@@ -66,9 +66,9 @@ export class EditCertificationComponent implements OnInit {
   facilityEntityTypeFormControl: AbstractControl;
   productEnityTypeFormControl: AbstractControl;
 
+
   constructor(private _formBuilder: FormBuilder, private _route: ActivatedRoute) { 
     this._route.params.subscribe(data => {
-
       this.certification = this._route.snapshot.data['CertificationData'];
       this.publicId = this.certification? this.certification.publicId: '';
       this.name = this.certification? this.certification.name: '';
@@ -76,10 +76,15 @@ export class EditCertificationComponent implements OnInit {
       this.languageFr = this.certification? this.certification.languageFr: '';
       this.languageEs = this.certification? this.certification.languageEs: '';
       this.languageZh = this.certification? this.certification.languageZh: '';
-
+      this.facilityEntityType =this.certification && this.certification.entityTypes.indexOf('Facility') != -1 ? true : false;
+      this.productEntityType =this.certification && this.certification.entityTypes.indexOf('ProductRef') != -1 ? true : false;
       this.categoriesPanelDetails.items = this.certification ? this.certification.categories : [];
       this.activitiesPanelDetails.items = this.certification ? this.certification.activities : [];
       this.countriesPanelDetails.items = this.certification ? this.certification.countries : [];
+
+      if(this.certification) {
+        this.onEditModeDisable();
+      }
     })
   }
 
@@ -97,14 +102,14 @@ export class EditCertificationComponent implements OnInit {
     this.languageZh = this.certification? this.certification.languageZh: '';
 
     this.certificationFormGroup = this._formBuilder.group({
-      publicId: [this.publicId, Validators.required],
-      name: [this.name, Validators.required],
-      languageEn: [this.languageEn, Validators.required],
-      languageFr: [this.languageFr, Validators.required],
-      languageEs: [this.languageEs, Validators.required],
-      languageZh: [this.languageZh, Validators.required],
-      facilityEntityType: [false],
-      productEntityType: [false]
+      publicId: [{value: this.publicId, disabled: this.certification && !this.editModeEnabled ? true : false}, Validators.required],
+      name: [{value: this.name, disabled: this.certification && !this.editModeEnabled ? true : false}, Validators.required],
+      languageEn: [{value: this.languageEn, disabled: this.certification && !this.editModeEnabled ? true : false}, Validators.required],
+      languageFr: [{value: this.languageFr, disabled: this.certification && !this.editModeEnabled ? true : false}, Validators.required],
+      languageEs: [{value: this.languageEs, disabled: this.certification && !this.editModeEnabled ? true : false}, Validators.required],
+      languageZh: [{value: this.languageZh, disabled: this.certification && !this.editModeEnabled ? true : false}, Validators.required],
+      facilityEntityType: [{value: this.certification && this.certification.entityTypes.indexOf('Facility') != -1 ? true : false,  disabled: this.certification && !this.editModeEnabled ? true : false}],
+      productEntityType: [{value: this.certification && this.certification.entityTypes.indexOf('ProductRef') != -1 ? true : false,  disabled: this.certification && !this.editModeEnabled ? true : false}]
     });
 
     this.publicIdFormControl = this.certificationFormGroup.get('publicId');
@@ -117,8 +122,62 @@ export class EditCertificationComponent implements OnInit {
     this.productEnityTypeFormControl = this.certificationFormGroup.get('productEntityType');
   }
 
+  checkEntityType(entityType: string): boolean {
+    if(this.certification && this.certification.entityTypes.indexOf(entityType) != -1) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
   onActivateEditMode(): void {
-    this.editModeActivated = true;
+    this.editModeEnabled = true;
+
+    this.publicIdFormControl.enable();
+    this.nameFormControl.enable();
+    this.languageEnFormControl.enable();
+    this.languageFrFormControl.enable();
+    this.languageEsFormControl.enable();
+    this.languageZhFormControl.enable();
+    this.facilityEntityTypeFormControl.enable();
+    this.productEnityTypeFormControl.enable();
+  }
+
+  onEditModeDisable(): void {
+    this.editModeEnabled = false;
+
+    if(this.publicIdFormControl) {
+      this.publicIdFormControl.disable();
+    }
+
+    if(this.nameFormControl) {
+        this.nameFormControl.disable();
+    }
+
+    if(this.languageEnFormControl) {
+    this.languageEnFormControl.disable();
+    }
+
+    if(this.languageFrFormControl) {
+      this.languageFrFormControl.disable();
+    }
+
+    if(this.languageEsFormControl) {
+      this.languageEsFormControl.disable();    
+    }
+
+    if(this.languageZhFormControl) {
+          this.languageZhFormControl.disable();
+    }
+
+    if(this.facilityEntityTypeFormControl) {
+     this.facilityEntityTypeFormControl.disable();     
+    }
+
+    if(this.productEnityTypeFormControl) {
+          this.productEnityTypeFormControl.disable();
+    }
   }
 
   closeSideNavigation() {
