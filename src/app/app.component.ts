@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MdInputModule} from '@angular/material';
+import {MdSelectModule} from '@angular/material';
 import {FormControl, FormGroupDirective, NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 
@@ -12,6 +12,32 @@ export class AppComponent {
   title = 'app works!';
   constructor(private _router: Router) {}
 
+
+  certificationLinks = [
+    {
+      label: 'Certifications',
+      link: '/certifications-tool'
+    },
+    {
+      label: 'Certifications-Categories',
+      link: '/certifications-tool/categories'
+    },
+    {
+      label: 'Certifications-Activities',
+      link: '/certifications-tool/activities'
+    },
+    {
+      label: 'Certifications-Countries',
+      link: '/certifications-tool/countries'
+    }
+  ];
+
+  selectedEntityLink = this.certificationLinks[0].link;
+
+  onSelectEntityChanged(event) {
+    this.selectedEntityLink = event.value;
+    this._router.navigate([event.value]);
+  }
   isCurrent(route: string): string {
     if(this._router.isActive(route, true)) {
      return "active isCurrent";

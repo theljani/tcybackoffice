@@ -12,6 +12,9 @@ import {DragulaModule} from "ng2-dragula";
 import { DragDropComponent } from './draganddrop/drag-drop/drag-drop.component';
 
 import {ResolveGuard} from '../certifications-tool/edit-certification/guards/resolve.guard';
+import {CertificationsService} from '../certifications-tool/services/certifications.service';
+import { CertificationDefaultComponent } from './certification-default-component/certification-default-component.component';
+import { CertificationLinksPanelComponent } from './certification-links-panel/certification-links-panel.component';
 
 @NgModule({
   imports: [
@@ -22,7 +25,7 @@ import {ResolveGuard} from '../certifications-tool/edit-certification/guards/res
     CertificationsToolRoutingModule,
     DragulaModule
   ],
-  declarations: [CertificationsListComponent, CertificationCategoriesListComponent, CertificationCategoriesListComponent, CertificationActivitiesListComponent, CertificationCountriesListComponent, EditCertificationComponent, DragDropComponent],
-  providers: [ResolveGuard]
+  declarations: [CertificationsListComponent, CertificationCategoriesListComponent, CertificationCategoriesListComponent, CertificationActivitiesListComponent, CertificationCountriesListComponent, EditCertificationComponent, DragDropComponent, CertificationDefaultComponent, CertificationLinksPanelComponent],
+  providers: [ResolveGuard, CertificationsService]
 })
 export class CertificationsToolModule { }

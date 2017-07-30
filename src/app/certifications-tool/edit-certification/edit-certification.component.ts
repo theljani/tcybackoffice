@@ -1,8 +1,12 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, AbstractControl, Validators} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
-import {Certification} from '../models/certification';
+import {CertificationDetails} from '../models/certification-details';
 import  {DragDropComponent} from '../draganddrop/drag-drop/drag-drop.component';
+
+import {ItemModel} from '../models/item-model';
+import {CertificationLinksPanelComponent} from '../certification-links-panel/certification-links-panel.component';
+
 
 @Component({
   selector: 'app-edit-certification',
@@ -11,9 +15,35 @@ import  {DragDropComponent} from '../draganddrop/drag-drop/drag-drop.component';
 })
 export class EditCertificationComponent implements OnInit {
   @Output() closeClicked = new EventEmitter<any>();
+  
+  @ViewChild(CertificationLinksPanelComponent) categoriesPanel: CertificationLinksPanelComponent;
+  @ViewChild(CertificationLinksPanelComponent) activitiesPanel: CertificationLinksPanelComponent;
+  @ViewChild(CertificationLinksPanelComponent) countriesPanel: CertificationLinksPanelComponent;
+
+  categoriesPanelDetails = {
+    title: 'Categories Panel',
+    items: []
+  };
+
+  activitiesPanelDetails = {
+    title: 'Activities Panel',
+    items: []
+  };
+
+  countriesPanelDetails = {
+    title: 'Countries Panel',
+    items: []
+  };
+
+  categoriesPanelTitle: string = "Categories Panel";
+  activitiesPanelTitle: string = "Activities Panel";
+  countriesPanelTitle: string = "Countries Panel";
+
+  editModeActivated = false;
 
   // models
-  certification: Certification;
+  certification: CertificationDetails;
+
   publicId: string;
   name: string;
   languageEn: string;
@@ -22,6 +52,9 @@ export class EditCertificationComponent implements OnInit {
   languageZh: string;
   facilityEntityType: boolean;
   productEntityType: boolean;
+  categories: ItemModel[] = [];
+  activities: ItemModel[] = [];
+  countries: ItemModel[] = [];
 
   certificationFormGroup: FormGroup;
   publicIdFormControl: AbstractControl;
@@ -34,11 +67,28 @@ export class EditCertificationComponent implements OnInit {
   productEnityTypeFormControl: AbstractControl;
 
   constructor(private _formBuilder: FormBuilder, private _route: ActivatedRoute) { 
+    this._route.params.subscribe(data => {
+
+      this.certification = this._route.snapshot.data['CertificationData'];
+      this.publicId = this.certification? this.certification.publicId: '';
+      this.name = this.certification? this.certification.name: '';
+      this.languageEn = this.certification? this.certification.languageEn: '';
+      this.languageFr = this.certification? this.certification.languageFr: '';
+      this.languageEs = this.certification? this.certification.languageEs: '';
+      this.languageZh = this.certification? this.certification.languageZh: '';
+
+      this.categoriesPanelDetails.items = this.certification ? this.certification.categories : [];
+      this.activitiesPanelDetails.items = this.certification ? this.certification.activities : [];
+      this.countriesPanelDetails.items = this.certification ? this.certification.countries : [];
+    })
   }
 
   ngOnInit() {
-    debugger
     this.certification = this._route.snapshot.data['CertificationData'];
+    this.categoriesPanelDetails.items = this.certification ? this.certification.categories : [];
+    this.activitiesPanelDetails.items = this.certification ? this.certification.activities : [];
+    this.countriesPanelDetails.items = this.certification ? this.certification.countries : [];
+
     this.publicId = this.certification? this.certification.publicId: '';
     this.name = this.certification? this.certification.name: '';
     this.languageEn = this.certification? this.certification.languageEn: '';
@@ -65,6 +115,10 @@ export class EditCertificationComponent implements OnInit {
     this.languageZhFormControl = this.certificationFormGroup.get('languageZh');
     this.facilityEntityTypeFormControl = this.certificationFormGroup.get('facilityEntityType');
     this.productEnityTypeFormControl = this.certificationFormGroup.get('productEntityType');
+  }
+
+  onActivateEditMode(): void {
+    this.editModeActivated = true;
   }
 
   closeSideNavigation() {

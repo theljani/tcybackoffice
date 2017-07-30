@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {MaterialModuleModule} from './common/material-module/material-module.module';
 import 'hammerjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import {CertificationsToolModule} from '../app/certifications-tool/certification
     BrowserModule,
     FormsModule,
     HttpModule,
+    MaterialModuleModule,
     AppRoutingModule, 
     BrowserAnimationsModule,
     CertificationsToolModule

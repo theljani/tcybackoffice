@@ -6,11 +6,25 @@ import {CertificationCategoriesListComponent} from './certification-categories-l
 import {CertificationActivitiesListComponent} from './certification-activities-list/certification-activities-list.component';
 import {CertificationCountriesListComponent} from './certification-countries-list/certification-countries-list.component';
 import {EditCertificationComponent} from './edit-certification/edit-certification.component';
+import {CertificationDefaultComponent} from './certification-default-component/certification-default-component.component';
+
 import {ResolveGuard} from '../certifications-tool/edit-certification/guards/resolve.guard';
 
 const routes: Routes = [
   {
-    path:'certifications-tool', component: CertificationsListComponent
+    path:'certifications-tool', component: CertificationsListComponent, 
+    children:[
+        {
+          path: '', component: CertificationDefaultComponent
+        },
+        {
+          path: 'edit-certification/:publicId', component: EditCertificationComponent,
+          resolve: {CertificationData: ResolveGuard ? ResolveGuard : null}
+        },
+        {
+          path: 'new-certification', component: EditCertificationComponent
+        }
+    ]
   },
   {
     path: 'certifications-tool/categories', component: CertificationCategoriesListComponent
@@ -20,13 +34,6 @@ const routes: Routes = [
   },
   {
     path: 'certifications-tool/countries', component: CertificationCountriesListComponent
-  }, 
-  {
-    path: 'certifications-tool/edit-certification/:publicId', component: EditCertificationComponent,
-    resolve: {CertificationData: ResolveGuard ? ResolveGuard : null}
-  },
-  {
-    path: 'certifications-tool/new-certification', component: EditCertificationComponent
   }
 ];
 

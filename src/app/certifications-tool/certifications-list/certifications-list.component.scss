@@ -1,4 +1,49 @@
-.certifications-list {
+.certifications_list {
+    .certifications_list_noItems {
+        padding: 40px;
+        text-align: center;
+        min-height: 100px;
+        background-color: #ffffff;
+        color: #666;
+    }
+
+    .certifications_list_items {
+        padding: 0;
+        background-color: #ffffff;
+
+        .certifications_list_item {
+            display: flex;
+            width: 100%;
+            height: 100px;
+            padding: 15px 10px;
+            border-top: 1px solid #e4e4e4;
+            border-bottom: 1px solid #e4e4e4;
+            margin-bottom: 2px;
+            color: #666;
+            
+            .certifications_list_item_left {
+                width: 80%;
+                display: block;
+            }
+
+            .certifications_list_item_right {
+                width: 20%;
+                display: block;
+            }
+            
+            .certifications_list_item_details {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+
+        .certifications_list_item--selected {
+            border-right: 6px solid #00b1bf;
+            border-left: 5px solid #00b1bf;
+            // background-color: #01E9FF;
+        }
+    }
+
     .sidenav-container {
         width: 100%;
         height: auto;
@@ -32,11 +77,20 @@
         text-decoration: none;
     }
 
-    .certfifications_list_actions_buttons {
+    .certfifications_list_actions {
         margin: 0 15px 0 25px;
+    }
+
+    .certfifications_list_actions_searchInput {
+        color: #666;
+        font-size: 12px;
+        font-weight: bold;
     }
 }
 
+.certifications_edit_create {
+    padding-top: 0;
+}
 // .sidenav-container > .mat-sidenav-content {
 //     padding: 20px !important;
 // }

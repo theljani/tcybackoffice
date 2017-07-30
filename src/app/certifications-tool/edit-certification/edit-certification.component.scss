@@ -4,7 +4,13 @@
     overflow: hidden;
     overflow-x: hidden;
     margin: 10px;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 20px;
 
+    .certification_menu {
+        float: right;
+    }
     .formFullWidth {
         width: 100%;
     }
@@ -18,8 +24,15 @@
         font-weight: 100;
         margin: 0 20px 0 10px;
     }
+
     .certification_content {
-        margin: 20px 0;
+        margin-bottom: 60px;
+
+        .certification_content_links {
+            //display: flex;
+            margin: 30px 0;
+            width: 100%;
+        }
     }
     .edit-certification-categories {
         width: 100%;
@@ -51,7 +64,8 @@
     }
 
     .certification_actions {
-        margin: 40px 40px 40px 0;
+        margin: 40px 0 0 0;
+        
         a {
              text-decoration: none;
          }

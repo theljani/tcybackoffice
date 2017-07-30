@@ -1,36 +1,48 @@
-<div class="certifications-list">
+<div class="col-md-12">
+    <div class="certfifications_list_actions">
+      <div class="pull-left">
+        <md-input-container floatPlaceholder="true" class="certfifications_list_actions_searchInput">
+          <input 
+          [(ngModel)]="searchFilter" 
+          (ngModelChange)="ngOnChanges($event)"
+          mdInput #filter placeholder="Search certifications">
+      </md-input-container>
+      </div>
+      <div class="pull-right">
+        <a md-mini-fab color="primary" (click)="onCreateNew()"><md-icon>add</md-icon></a>
+        <!--<a md-mini-fab color="accent" [disabled]="!selectedCertification" [routerLink]="['/certifications-tool/edit-certification', selectedCertification ? selectedCertification.publicId:'']"><md-icon>edit</md-icon></a>-->
+        <!--<a md-mini-fab color="warn" [disabled]="true"><md-icon>remove</md-icon></a>-->
+      </div>
+    </div>
+</div>
+<div class="certifications_list col-md-4">
   <!--<md-sidenav-container class="sidenav-container">-->
     <md-card-header>
-      <md-card-title>
+      <!--<md-card-title>
         <h4>Certifications</h4>
-      </md-card-title>
+      </md-card-title>-->
     </md-card-header>
-    <!--<md-card-actions class="pull-right">
-      <a md-mini-fab color="primary" (click)="CertificationSidenav.open()"><md-icon>add</md-icon></a>
-      <a md-mini-fab color="accent" (click)="editCertificationSidenav.open()"><md-icon>edit</md-icon></a>
-      <a md-mini-fab color="warn" [disabled]="true"><md-icon>remove</md-icon></a>
-    </md-card-actions>-->
     <md-card-content>
       <div class="row">
-        <div class="certfifications_list_actions_buttons">
-          <div class="pull-left">
-            <md-input-container floatPlaceholder="true">
-              <input 
-              [(ngModel)]="searchFilter" 
-              (ngModelChange)="ngOnChanges($event)"
-              mdInput #filter placeholder="Search certifications">
-          </md-input-container>
-          <!--<button md-raised-button (click)="clearFilter()"><md-icon>clear</md-icon></button>-->
-          </div>
-          <div class="pull-right">
-            <a md-mini-fab color="primary" [routerLink]="['/certifications-tool/new-certification']"><md-icon>add</md-icon></a>
-            <a md-mini-fab color="accent" [disabled]="!selectedCertification" [routerLink]="['/certifications-tool/edit-certification', selectedCertification ? selectedCertification.publicId:'']"><md-icon>edit</md-icon></a>
-            <a md-mini-fab color="warn" [disabled]="true"><md-icon>remove</md-icon></a>
+        <div class="certifications_list_noItems" *ngIf="certifications.length == 0">
+          <h4>No Items</h4>
+        </div>
+        <div class="certifications_list_items" *ngIf="certifications.length > 0">
+          <div class="certifications_list_item"  [ngClass]="{'certifications_list_item--selected': selectedCertification && item.publicId == selectedCertification.publicId}" 
+                (click)="onCertificationSelected(item)" 
+                *ngFor="let item of certifications">
+            <div class="certifications_list_item_left">
+              <span class="certifications_list_item_details">{{item.name}}</span>
+              <span class="certifications_list_item_details">{{item.publicId}}</span>
+            </div>
+            <div class="certifications_list_item_right">
+              <span class="certifications_list_item_details">Facility</span>
+              <span class="certifications_list_item_details">ProductRef</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="certifications-list-items">
+
+        <!--<div class="certifications-list-items">
           <md-table #table [dataSource]="dataSource" mdSort>
             <ng-container cdkColumnDef="checkAll">
               <md-header-cell [ngClass]="'customWidthClass'" *cdkHeaderCellDef >
@@ -82,24 +94,20 @@
             <md-header-row *cdkHeaderRowDef="certificationsColumns"></md-header-row>
             <md-row  *cdkRowDef="let row; columns: certificationsColumns;" [ngClass]="{'isSelected': row.isChecked }"></md-row>
           </md-table>
-        </div>
+        </div>-->
       </div>
       
     </md-card-content>
-    <md-card-actions>
+    <!--<md-card-actions>
         <md-paginator  #paginator
                       [length]="CertificationsData.data.length"
                       [pageIndex]="0"
                       [pageSize]="10"
                       [pageSizeOptions]="[5, 10, 25, 100]">
         </md-paginator>
-    </md-card-actions>
+    </md-card-actions>-->
+</div>
 
-    <!--<md-sidenav #newCertifSideNav mode="push" #CertificationSidenav class="edit-certification-sidenav">
-      <app-edit-certification (closeClicked)="CertificationSideNavClose($event)"></app-edit-certification>
-    </md-sidenav>-->
-    <!--<md-sidenav mode="push" #editCertificationSidenav class="example-sidenav">
-      Create New Certification
-    </md-sidenav>-->
-  <!--</md-sidenav-container>-->
+<div class="certifications_edit_create col-md-8">
+   <router-outlet></router-outlet>
 </div>

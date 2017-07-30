@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import {Router} from '@angular/router';
+import {CertificationsService} from '../../services/certifications.service';
 
 @Injectable()
 export class ResolveGuard implements Resolve<any> {
@@ -85,12 +87,13 @@ export class ResolveGuard implements Resolve<any> {
       }
   ];
 
+  constructor(private _route: Router, private _certificationServices: CertificationsService) {
+  }
+
   resolve(route: ActivatedRouteSnapshot): any {
-    debugger
-    let publicId = route.url[2].path;
-    var certification = this.initialData.filter((item: any) => {
-      return item.publicId == publicId;
-    })[0];
+    //debugger
+    let publicId = route.url[1].path;
+    var certification = this._certificationServices.getCertificationDetails(publicId);
 
     return certification;
   }

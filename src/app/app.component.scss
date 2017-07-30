@@ -1,3 +1,34 @@
+.certifications {
+  .certifications_header {
+    height: 54px;
+    background-color: #ffffff;
+  }
+
+  .certifications_header_logo {
+      display: inline-block;
+      padding: 0 10px;
+      width: 200px;
+      line-height: 52px;
+  }
+
+  .certifications_header_links {
+    width: 80px;
+    margin-left: 100px;
+    display: inline-block;
+
+    .certifications_header_links_select {
+      width: 210px;
+    }
+  }
+}
+
+.certifications_content {
+  padding: 10px 0;
+  width: 100%;
+  height: 100%;
+  background-color: #e4e4e4;
+}
+
 .nav-side-menu {
   overflow: auto;
   font-family: verdana;
@@ -155,9 +186,4 @@ body {
 }
 .certifications_aside {
   padding: 0;
-}
-
-.certifications_content {
-  padding: 50px 15px 0 0;
-  height: 100%;
 }
