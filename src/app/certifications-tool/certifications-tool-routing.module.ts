@@ -12,19 +12,22 @@ import {ResolveGuard} from '../certifications-tool/edit-certification/guards/res
 
 const routes: Routes = [
   {
-    path:'certifications-tool', component: CertificationsListComponent, 
-    children:[
-        {
-          path: '', component: CertificationDefaultComponent
-        },
-        {
-          path: 'edit-certification/:publicId', component: EditCertificationComponent,
-          resolve: {CertificationData: ResolveGuard ? ResolveGuard : null}
-        },
-        {
-          path: 'new-certification', component: EditCertificationComponent
-        }
-    ]
+    path:'certifications-tool', component: CertificationDefaultComponent, 
+    // children:[
+    //     {
+    //       path: '', component: CertificationDefaultComponent
+    //     },
+    //     {
+    //       path: 'edit-certification/:publicId', component: EditCertificationComponent,
+    //       resolve: {CertificationData: ResolveGuard ? ResolveGuard : null}
+    //     },
+    //     {
+    //       path: 'new-certification', component: EditCertificationComponent
+    //     }
+    // ]
+  },
+  {
+    path:'certifications-tool/certifications', component: CertificationDefaultComponent, 
   },
   {
     path: 'certifications-tool/categories', component: CertificationCategoriesListComponent

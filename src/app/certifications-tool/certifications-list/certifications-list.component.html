@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<!--<div class="col-md-12">
     <div class="certfifications_list_actions">
       <div class="pull-left">
         <md-input-container floatPlaceholder="true" class="certfifications_list_actions_searchInput">
@@ -10,25 +10,17 @@
       </div>
       <div class="pull-right">
         <a md-mini-fab color="primary" (click)="onCreateNew()"><md-icon>add</md-icon></a>
-        <!--<a md-mini-fab color="accent" [disabled]="!selectedCertification" [routerLink]="['/certifications-tool/edit-certification', selectedCertification ? selectedCertification.publicId:'']"><md-icon>edit</md-icon></a>-->
-        <!--<a md-mini-fab color="warn" [disabled]="true"><md-icon>remove</md-icon></a>-->
       </div>
     </div>
-</div>
-<div class="certifications_list col-md-4">
-  <!--<md-sidenav-container class="sidenav-container">-->
-    <md-card-header>
-      <!--<md-card-title>
-        <h4>Certifications</h4>
-      </md-card-title>-->
-    </md-card-header>
+</div>-->
+<div class="certifications_list">
     <md-card-content>
       <div class="row">
         <div class="certifications_list_noItems" *ngIf="certifications.length == 0">
           <h4>No Items</h4>
         </div>
         <div class="certifications_list_items" *ngIf="certifications.length > 0">
-          <div class="certifications_list_item"  [ngClass]="{'certifications_list_item--selected': selectedCertification && item.publicId == selectedCertification.publicId}" 
+          <div class="certifications_list_item"  [ngClass]="{'certifications_list_item--selected': mode =='EDIT' && selectedCertification && item.publicId == selectedCertification.publicId}" 
                 (click)="onCertificationSelected(item)" 
                 *ngFor="let item of certifications">
             <div class="certifications_list_item_left">
@@ -108,6 +100,6 @@
     </md-card-actions>-->
 </div>
 
-<div class="certifications_edit_create col-md-8">
+<!--<div class="certifications_edit_create col-md-8">
    <router-outlet></router-outlet>
-</div>
+</div>-->

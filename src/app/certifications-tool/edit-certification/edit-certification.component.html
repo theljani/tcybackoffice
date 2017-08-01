@@ -1,15 +1,15 @@
 <div class="certification">
-  <md-card-header class="certification_menu" *ngIf="certification">
+  <md-card-header class="certification_menu" *ngIf="mode=='EDIT'">
     <button class="pull-right" md-icon-button [mdMenuTriggerFor]="menu">
       <md-icon>more_vert</md-icon>
     </button>
     <md-menu #menu="mdMenu">
-      <button md-menu-item (click)="onActivateEditMode()" *ngIf="!editModeEnabled">
+      <button md-menu-item (click)="onEnableEditEvent()" *ngIf="!editModeEnabled">
         <md-icon>edit</md-icon>
         <span>Enable Edit</span>
       </button>
 
-      <button md-menu-item (click)="onEditModeDisable()" *ngIf="editModeEnabled">
+      <button md-menu-item (click)="onDisableEditEvent()" *ngIf="editModeEnabled">
         <md-icon>edit</md-icon>
         <span>Disable Edit</span>
       </button>
@@ -21,22 +21,24 @@
     </md-menu>
   </md-card-header>
   <md-card-content class="certification_content">
-    <form [formGroup]='certificationFormGroup'>
+    <form>
       <table class="formFullWidth">
         <tr>
           <td>
             <md-input-container floatPlaceholder="true">
               <input mdInput 
-                [(ngModel)]="publicId"
-                formControlName="publicId"
+                [(ngModel)]="certification.publicId"
+                [ngModelOptions]="{standalone: true}"
+                [disabled]="mode =='EDIT' && !editModeEnabled"
                 placeholder="Public ID"/>
             </md-input-container>
           </td>
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="name"
-                formControlName="name"
+                [(ngModel)]="certification.name"
+                [disabled]="mode =='EDIT' && !editModeEnabled"
+                [ngModelOptions]="{standalone: true}"
                 placeholder="Certification Name" >
             </md-input-container>
           </td>
@@ -45,32 +47,36 @@
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="languageEn"
-                formControlName="languageEn"
+                [(ngModel)]="certification.languageEn"
+                [disabled]="mode =='EDIT' && !editModeEnabled"
+                [ngModelOptions]="{standalone: true}"
                 placeholder="English Term" >
             </md-input-container>
           </td>
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="languageFr"
-                formControlName="languageFr"
+                [(ngModel)]="certification.languageFr"
+                [disabled]="mode =='EDIT' && !editModeEnabled"
+                [ngModelOptions]="{standalone: true}"
                 placeholder="French Term" >
             </md-input-container>
           </td>
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="languageEs"
-                formControlName="languageEs"
+                [(ngModel)]="certification.languageEs"
+                [disabled]="mode =='EDIT' && !editModeEnabled"
+                [ngModelOptions]="{standalone: true}"
                 placeholder="Spanish Term" >
             </md-input-container>
           </td>
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="languageZh"
-                formControlName="languageZh"
+                [(ngModel)]="certification.languageZh"
+                [disabled]="mode =='EDIT' && !editModeEnabled"
+                [ngModelOptions]="{standalone: true}"
                 placeholder="Chineese Term" >
             </md-input-container>
           </td>
@@ -79,33 +85,35 @@
           <td colspan="2">
               <label>Entity Types:</label>
               <md-checkbox class="sides-margin"
-                formControlName="facilityEntityType"
                 [(ngModel)]="facilityEntityType"
+                [disabled]="mode =='EDIT' && !editModeEnabled"
+                [ngModelOptions]="{standalone: true}"
                 color="primary">Facility</md-checkbox>
               <md-checkbox class="sides-margin"
-                formControlName="productEntityType"
                 [(ngModel)]="productEntityType"
+                [disabled]="mode =='EDIT' && !editModeEnabled"
+                [ngModelOptions]="{standalone: true}"
                 color="primary">Product Reference</md-checkbox>
           </td>
         </tr>
       </table>
       <div class="certification_content_links">
         <div class="col-md-4 col-sm-12 col-xs-12">
-          <app-certification-links-panel #categoriesPanel [editModeEnabled]="editModeEnabled" [panelDetails]='categoriesPanelDetails'></app-certification-links-panel>
+          <app-certification-links-panel #categoriesPanel [editModeEnabled]="mode =='CREATE' || (mode=='EDIT' && editModeEnabled)" [panelDetails]='categoriesPanelDetails'></app-certification-links-panel>
         </div>
 
         <div class="col-md-4 col-sm-12 col-xs-12">
-          <app-certification-links-panel #activitiesPanel [editModeEnabled]="editModeEnabled" [panelDetails]='activitiesPanelDetails'></app-certification-links-panel>     
+          <app-certification-links-panel #activitiesPanel [editModeEnabled]="mode =='CREATE' || (mode=='EDIT' && editModeEnabled)" [panelDetails]='activitiesPanelDetails'></app-certification-links-panel>     
         </div>
 
         <div class="col-md-4 col-sm-12 col-xs-12">
-          <app-certification-links-panel #countriesPanel [editModeEnabled]="editModeEnabled" [panelDetails]='countriesPanelDetails'></app-certification-links-panel>          
+          <app-certification-links-panel #countriesPanel [editModeEnabled]="mode =='CREATE' || (mode=='EDIT' && editModeEnabled)" [panelDetails]='countriesPanelDetails'></app-certification-links-panel>          
         </div>
       </div>
     </form>
   </md-card-content>
   <md-card-actions class="certification_actions pull-right">
     <a md-raised-button color="accent" [routerLink]="['/']">Cancel</a>
-    <button md-raised-button color="primary" [disabled]="certification && ! editModeEnabled" (click)="closeSideNavigation()">Confirm</button>
+    <button md-raised-button color="primary" [disabled]="(mode=='EDIT' && !editModeEnabled)" (click)="closeSideNavigation()">Confirm</button>
   </md-card-actions>
 </div>

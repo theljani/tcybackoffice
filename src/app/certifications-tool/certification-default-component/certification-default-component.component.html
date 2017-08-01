@@ -1,5 +1,36 @@
-<md-card class="default_card">
+<!--<md-card class="default_card">
   <md-card-content class="select_certification_message">
     <h3>Please select a certification to show its details.</h3>
   </md-card-content>
 </md-card>
+
+-->
+<div class="certifications">
+  <div class="col-md-12">
+    <div class="col-md-4  col-sm-12 col-xs-12 certifications_filter">
+      <md-input-container floatPlaceholder="true" class="certfifications_list_actions_searchInput">
+        <input 
+        [(ngModel)]="searchFilter"
+        mdInput #filter placeholder="Search certifications">
+      </md-input-container> 
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="pull-right">
+        <a md-mini-fab color="primary" (click)="onCreateNewEvent()"><md-icon>add</md-icon></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-4  col-sm-12 col-xs-12">
+      <app-certifications-list 
+      [certificationsList]="certificationsList"
+      [mode]="mode"
+      (certificationSelectedEvent)="onCertificationSelected($event)"></app-certifications-list>
+    </div>
+    <div class="col-md-8  col-sm-12 col-xs-12 certifications_editPanel">
+      <app-edit-certification 
+      [mode]="mode"
+      [certification]="selectedCertification"></app-edit-certification>
+    </div>
+  </div>
+</div>

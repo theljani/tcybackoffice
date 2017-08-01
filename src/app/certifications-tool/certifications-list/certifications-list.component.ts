@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild, OnInit, OnChanges} from '@angular/core';
+import {Component, ElementRef, ViewChild, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {MdPaginator, MdSort, MdCheckbox, MdSidenavContainer, MdSidenav} from '@angular/material';
 import {DataSource} from '@angular/cdk';
@@ -25,17 +25,15 @@ import {CertificationDetails} from '../models/certification-details'
   templateUrl: './certifications-list.component.html',
   styleUrls: ['./certifications-list.component.scss']
 })
-export class CertificationsListComponent implements OnInit, OnChanges {
+export class CertificationsListComponent implements OnInit {
   searchFilter: string;
-  selectedCertification: CertificationDetails;
+  selectedCertification: Certification;
   action = undefined;
 
-  @ViewChild(MdPaginator) paginator: MdPaginator;
-  @ViewChild(MdSort) sort: MdSort;
-  @ViewChild(MdSidenav) newCertifSideNav: MdSidenav;
-  @ViewChild(EditCertificationComponent) CertificationchildComponent: EditCertificationComponent;
+  @Input() mode: string;
+  @Input() certificationsList : Certification[];
+  @Output() certificationSelectedEvent = new EventEmitter<Certification>();
 
-  allCertifications = [];
   certifications = undefined;
 
   constructor(private _router: Router, 
@@ -44,45 +42,13 @@ export class CertificationsListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.allCertifications = this._certificationsService.getAllCertifications();
-    this.certifications = this.allCertifications;
-    this.selectedCertification = undefined;
+    this.certifications = this.certificationsList;
+    this.selectedCertification = this.certifications[0];
   }
 
   onCertificationSelected(certification:Certification): void {
-    this.action = "edit";
-    this.selectedCertification = this._certificationsService.getCertificationDetails(certification.publicId);
-    debugger
-    this._router.navigate(['/certifications-tool/edit-certification', this.selectedCertification.publicId]);
-  }
-
-  onCreateNew() {
-    this.searchFilter = '';
-    this.selectedCertification = undefined;
-    this.action="new";
-    this.certifications = this.allCertifications;
-    this._router.navigate(['/certifications-tool/new-certification']);
-  }
-
-  ngOnChanges(searchInput: any): void {
-    this.selectedCertification = undefined;
-    if(this.action != "new") {
-      this._router.navigate(['/certifications-tool']);
-    }
-
-    this.certifications = this.allCertifications.filter(item => {
-      return (item.name.indexOf(searchInput) != -1
-              || item.publicId.indexOf(searchInput) != -1);
-    });
-  }
-
-  clearFilter() {
-    this.searchFilter = "";
-    this.ngOnChanges(null);
-  }
-
-  CertificationSideNavClose(event) {
-    this.newCertifSideNav.close();
+    this.selectedCertification = certification;
+    this.certificationSelectedEvent.emit(certification);
   }
 }
 
