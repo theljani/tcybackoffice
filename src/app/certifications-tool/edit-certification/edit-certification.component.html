@@ -20,6 +20,12 @@
       </button>
     </md-menu>
   </md-card-header>
+        <div class="row">
+        <div class="input-field col l6 m6 s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
   <md-card-content class="certification_content">
     <form>
       <table class="formFullWidth">
@@ -27,7 +33,7 @@
           <td>
             <md-input-container floatPlaceholder="true">
               <input mdInput 
-                [(ngModel)]="certification.publicId"
+                [(ngModel)]="selectedCertification.publicId"
                 [ngModelOptions]="{standalone: true}"
                 [disabled]="mode =='EDIT' && !editModeEnabled"
                 placeholder="Public ID"/>
@@ -36,7 +42,7 @@
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="certification.name"
+                [(ngModel)]="selectedCertification.name"
                 [disabled]="mode =='EDIT' && !editModeEnabled"
                 [ngModelOptions]="{standalone: true}"
                 placeholder="Certification Name" >
@@ -47,7 +53,7 @@
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="certification.languageEn"
+                [(ngModel)]="selectedCertification.languageEn"
                 [disabled]="mode =='EDIT' && !editModeEnabled"
                 [ngModelOptions]="{standalone: true}"
                 placeholder="English Term" >
@@ -56,7 +62,7 @@
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="certification.languageFr"
+                [(ngModel)]="selectedCertification.languageFr"
                 [disabled]="mode =='EDIT' && !editModeEnabled"
                 [ngModelOptions]="{standalone: true}"
                 placeholder="French Term" >
@@ -65,7 +71,7 @@
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="certification.languageEs"
+                [(ngModel)]="selectedCertification.languageEs"
                 [disabled]="mode =='EDIT' && !editModeEnabled"
                 [ngModelOptions]="{standalone: true}"
                 placeholder="Spanish Term" >
@@ -74,7 +80,7 @@
           <td>
             <md-input-container floatPlaceholder="true">
                 <input mdInput
-                [(ngModel)]="certification.languageZh"
+                [(ngModel)]="selectedCertification.languageZh"
                 [disabled]="mode =='EDIT' && !editModeEnabled"
                 [ngModelOptions]="{standalone: true}"
                 placeholder="Chineese Term" >

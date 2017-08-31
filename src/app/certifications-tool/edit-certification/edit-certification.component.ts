@@ -22,6 +22,19 @@ export class EditCertificationComponent implements OnInit, OnChanges {
   @ViewChild(CertificationLinksPanelComponent) activitiesPanel: CertificationLinksPanelComponent;
   @ViewChild(CertificationLinksPanelComponent) countriesPanel: CertificationLinksPanelComponent;
 
+  selectedCertification: CertificationDetails = {
+    publicId: '',
+    name: '',
+    languageEn: '',
+    languageFr: '',
+    languageEs: '',
+    languageZh: '',
+    categories: [],
+    activities: [],
+    countries: [],
+    entityTypes: []
+  };
+
   categoriesPanelDetails = {
     title: 'Categories Panel',
     items: []
@@ -54,7 +67,12 @@ export class EditCertificationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: any): void {
-    this.certification = changes.certification.currentValue;
+    debugger
+    if(this.certification != null) {
+      this.selectedCertification = this.certification;
+    }
+
+
     this.categoriesPanelDetails.items = this.certification ? this.certification.categories : [];
     this.activitiesPanelDetails.items = this.certification ? this.certification.activities : [];
     this.countriesPanelDetails.items = this.certification ? this.certification.countries : [];

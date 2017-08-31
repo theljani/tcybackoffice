@@ -6,3 +6,13 @@ export interface Certification {
   languageEs: string;
   languageZh: string;
 }
+
+
+export interface CertificationItem {
+  publicId: string;
+  name: string;
+  activities: any[];
+  categories: any[];
+  countries: any[];
+  entityTypes: any[];
+}

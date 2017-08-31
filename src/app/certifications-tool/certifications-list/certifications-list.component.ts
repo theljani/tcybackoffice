@@ -10,29 +10,29 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
-
 // Service
-import {CertificationsService} from '../services/certifications.service';
+import {CertificationsService} from './services/certifications.service';
 // Child Components
 import {EditCertificationComponent} from '../edit-certification/edit-certification.component';
 
 // Models
-import {Certification} from '../models/certification';
+import {Certification, CertificationItem} from '../models/certification';
 import {CertificationDetails} from '../models/certification-details'
+
 
 @Component({
   selector: 'app-certifications-list',
   templateUrl: './certifications-list.component.html',
   styleUrls: ['./certifications-list.component.scss']
 })
-export class CertificationsListComponent implements OnInit {
+export class CertificationsListComponent implements OnInit, OnChanges {
   searchFilter: string;
-  selectedCertification: Certification;
+  selectedCertification: CertificationItem;
   action = undefined;
 
   @Input() mode: string;
-  @Input() certificationsList : Certification[];
-  @Output() certificationSelectedEvent = new EventEmitter<Certification>();
+  @Input() certificationsList : CertificationItem[];
+  @Output() certificationSelectedEvent = new EventEmitter<CertificationItem>();
 
   certifications = undefined;
 
@@ -42,11 +42,19 @@ export class CertificationsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.certifications = this.certificationsList;
-    this.selectedCertification = this.certifications[0];
+    // this.certifications = this.certificationsList;
+
+    // this._certificationsService.getAllCertifications().subscribe(data => {
+    //   this.certifications = data.json();
+    // });
+   // this.selectedCertification = this._certificationsService.getCertificationDetails(this.certifications[0].publicId);
   }
 
-  onCertificationSelected(certification:Certification): void {
+  ngOnChanges(data) {
+    this.certifications = this.certificationsList;
+  }
+
+  onCertificationSelected(certification:CertificationItem): void {
     this.selectedCertification = certification;
     this.certificationSelectedEvent.emit(certification);
   }

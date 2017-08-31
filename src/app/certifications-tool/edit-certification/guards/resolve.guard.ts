@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import {Router} from '@angular/router';
-import {CertificationsService} from '../../services/certifications.service';
+import {CertificationsService} from '../../certifications-list/services/certifications.service';
 
 @Injectable()
 export class ResolveGuard implements Resolve<any> {
@@ -93,8 +93,8 @@ export class ResolveGuard implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot): any {
     //debugger
     let publicId = route.url[1].path;
-    var certification = this._certificationServices.getCertificationDetails(publicId);
+   // var certification = this._certificationServices.getCertificationDetails(publicId);
 
-    return certification;
+    return {};
   }
 }

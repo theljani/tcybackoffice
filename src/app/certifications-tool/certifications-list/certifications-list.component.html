@@ -1,25 +1,14 @@
-<!--<div class="col-md-12">
-    <div class="certfifications_list_actions">
-      <div class="pull-left">
-        <md-input-container floatPlaceholder="true" class="certfifications_list_actions_searchInput">
-          <input 
-          [(ngModel)]="searchFilter" 
-          (ngModelChange)="ngOnChanges($event)"
-          mdInput #filter placeholder="Search certifications">
-      </md-input-container>
-      </div>
-      <div class="pull-right">
-        <a md-mini-fab color="primary" (click)="onCreateNew()"><md-icon>add</md-icon></a>
-      </div>
-    </div>
-</div>-->
+<div class="row">
+  <app-pagination></app-pagination>
+</div>
 <div class="certifications_list">
+
     <md-card-content>
       <div class="row">
-        <div class="certifications_list_noItems" *ngIf="certifications.length == 0">
+        <div class="certifications_list_noItems" *ngIf="certifications && certifications.length == 0">
           <h4>No Items</h4>
         </div>
-        <div class="certifications_list_items" *ngIf="certifications.length > 0">
+        <div class="certifications_list_items" *ngIf="certifications && certifications.length > 0">
           <div class="certifications_list_item"  [ngClass]="{'certifications_list_item--selected': mode =='EDIT' && selectedCertification && item.publicId == selectedCertification.publicId}" 
                 (click)="onCertificationSelected(item)" 
                 *ngFor="let item of certifications">
@@ -27,66 +16,12 @@
               <span class="certifications_list_item_details">{{item.name}}</span>
               <span class="certifications_list_item_details">{{item.publicId}}</span>
             </div>
-            <div class="certifications_list_item_right">
+            <!--<div class="certifications_list_item_right">
               <span class="certifications_list_item_details">Facility</span>
               <span class="certifications_list_item_details">ProductRef</span>
-            </div>
+            </div>-->
           </div>
         </div>
-
-        <!--<div class="certifications-list-items">
-          <md-table #table [dataSource]="dataSource" mdSort>
-            <ng-container cdkColumnDef="checkAll">
-              <md-header-cell [ngClass]="'customWidthClass'" *cdkHeaderCellDef >
-                  <md-checkbox
-                    [(ngModel)]="allRowsChecked"
-                    [checked]="allRowsChecked"
-                    (change)= "onCheckAllChanges($event)"
-                    [align]="align"
-                    [disabled]="disabled"
-                    color="primary">
-                </md-checkbox>
-              </md-header-cell>
-              <md-cell [ngClass]="'customWidthClass'" *cdkCellDef="let row">
-                  <md-checkbox
-                    [(ngModel)]="row.isChecked"
-                    [checked]="row.isChecked"
-                    (change)="onCheckboxChecked(row)"
-                    [align]="align"
-                    [disabled]="disabled"
-                    color="primary">
-                </md-checkbox>
-              </md-cell>
-            </ng-container>
-            <ng-container cdkColumnDef="name">
-              <md-header-cell *cdkHeaderCellDef md-sort-header>Certification</md-header-cell>
-              <md-cell *cdkCellDef="let row">{{row.name}}</md-cell>
-            </ng-container>
-
-            <ng-container  cdkColumnDef="languageEn">
-              <md-header-cell *cdkHeaderCellDef md-sort-header>Language=EN</md-header-cell>
-              <md-cell *cdkCellDef="let row">{{row.languageEn}}</md-cell>
-            </ng-container>
-
-            <ng-container cdkColumnDef="languageFr">
-              <md-header-cell  *cdkHeaderCellDef md-sort-header>Language=FR</md-header-cell>
-              <md-cell *cdkCellDef="let row">{{row.languageFr}}</md-cell>
-            </ng-container>
-
-            <ng-container cdkColumnDef="languageEs">
-              <md-header-cell  *cdkHeaderCellDef md-sort-header>Language=ES</md-header-cell>
-              <md-cell *cdkCellDef="let row">{{row.languageEs}}</md-cell>
-            </ng-container>
-
-            <ng-container cdkColumnDef="languageZh">
-              <md-header-cell  *cdkHeaderCellDef md-sort-header>Language=ZH</md-header-cell>
-              <md-cell *cdkCellDef="let row">{{row.languageZh}}</md-cell>
-            </ng-container>
-
-            <md-header-row *cdkHeaderRowDef="certificationsColumns"></md-header-row>
-            <md-row  *cdkRowDef="let row; columns: certificationsColumns;" [ngClass]="{'isSelected': row.isChecked }"></md-row>
-          </md-table>
-        </div>-->
       </div>
       
     </md-card-content>
@@ -99,7 +34,3 @@
         </md-paginator>
     </md-card-actions>-->
 </div>
-
-<!--<div class="certifications_edit_create col-md-8">
-   <router-outlet></router-outlet>
-</div>-->
